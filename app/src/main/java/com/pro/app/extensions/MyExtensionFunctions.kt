@@ -16,22 +16,8 @@ fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
-fun AppCompatImageView.loadUrl(url: String) {
-    Glide.with(this)
-        .load(url)
-        .error(R.drawable.placeholder)
-        .into(this)
-}
-
 fun String.showLog() {
     Log.d(TAG, this)
-}
-
-fun String.dateInFormat(from: String, to: String) {
-    val currentDateFormat = SimpleDateFormat(from, Locale.getDefault())
-    val dateToFormat = currentDateFormat.parse(this)
-    val newDateFormat = SimpleDateFormat(to, Locale.getDefault())
-    newDateFormat.format(dateToFormat)
 }
 
 fun AppCompatActivity.showMessage(msg: String) {
@@ -46,4 +32,8 @@ fun AppCompatActivity.showMessage(msg: String) {
 
     }
     alertDialog.show()
+}
+
+fun Float.roundTo(n : Int) : Float {
+    return "%.${n}f".format(this).toFloat()
 }

@@ -69,7 +69,7 @@
                 android:id="@+id/txtFollowers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_3sdp"
                 android:fontFamily="@font/nunito_semibold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
@@ -82,7 +82,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_10sdp"
-                tools:text="Followers" />
+                android:text="Followers" />
 
         </LinearLayout>
 
@@ -97,7 +97,7 @@
                 android:id="@+id/txtFollowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_3sdp"
                 android:fontFamily="@font/nunito_semibold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
@@ -110,7 +110,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_10sdp"
-                tools:text="Following" />
+                android:text="Following" />
 
         </LinearLayout>
 
@@ -125,7 +125,7 @@
                 android:id="@+id/txtRepos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_3sdp"
                 android:fontFamily="@font/nunito_semibold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
@@ -138,7 +138,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_10sdp"
-                tools:text="Repositories" />
+                android:text="Repositories" />
 
         </LinearLayout>
 

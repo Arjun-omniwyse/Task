@@ -1,15 +1,22 @@
 package com.pro.app.ui.views.activities
 
 import android.os.Build
+import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pro.app.R
 import com.pro.app.data.Status
 import com.pro.app.data.models.ModelUser
+import com.pro.app.data.models.ModelUserData
 import com.pro.app.data.models.OnClick
+import com.pro.app.extensions.roundTo
 import com.pro.app.extensions.showLog
 import com.pro.app.extensions.showMessage
 import com.pro.app.ui.adapters.UsersListAdapter
@@ -40,7 +47,7 @@ class MainActivity : BaseActivity() {
         adapter = UsersListAdapter(this, list, object : OnClick {
 
             override fun onUserClicked(modelUser: ModelUser) {
-
+                mainViewModel.getUserData(modelUser.login)
             }
         })
 
@@ -55,6 +62,23 @@ class MainActivity : BaseActivity() {
                     list.addAll(it.data!!)
                     adapter.notifyDataSetChanged()
 
+                }
+                Status.LOADING -> {
+                    showLoading()
+                }
+                Status.ERROR -> {
+                    hideLoading()
+                    it.message?.let { showMessage(it) }
+                }
+            }
+        })
+
+        mainViewModel.userDataLiveData.observe(this, Observer {
+            "data posted".showLog()
+            when (it?.status) {
+                Status.SUCCESS -> {
+                    hideLoading()
+                    userDetailsBottomSheet(it.data)
                 }
                 Status.LOADING -> {
                     showLoading()
@@ -82,5 +106,32 @@ class MainActivity : BaseActivity() {
                 "list"
             }
         }
+    }
+
+    private fun userDetailsBottomSheet(modelUserData: ModelUserData?) {
+        val view: View = layoutInflater.inflate(R.layout.bottomsheet_userdetails, null)
+        var dialogPaymentOptions = BottomSheetDialog(this)
+        dialogPaymentOptions?.setContentView(view)
+
+        val imgUser = view.findViewById<ImageView>(R.id.imgUser)
+        val txtOriginalName = view.findViewById<TextView>(R.id.txtOriginalName)
+        val txtNickName = view.findViewById<TextView>(R.id.txtNickName)
+        val txtFollowers = view.findViewById<TextView>(R.id.txtFollowers)
+        val txtFollowing = view.findViewById<TextView>(R.id.txtFollowing)
+        val txtRepos = view.findViewById<TextView>(R.id.txtRepos)
+
+        txtNickName.text = modelUserData?.login
+        txtOriginalName.text = modelUserData?.name
+        txtFollowers.text =
+            if (modelUserData?.followers!!.toFloat() > 1000) "${(modelUserData?.followers!!.toFloat() / 1000).roundTo(1)}k" else modelUserData?.followers
+        txtFollowing.text = if (modelUserData?.following!!.toFloat() > 1000) "${(modelUserData?.following!!.toFloat() / 1000).roundTo(1)}k" else modelUserData?.following
+        txtRepos.text = modelUserData?.public_repos
+
+        Glide.with(this)
+            .load(modelUserData?.avatar_url).dontTransform()
+            .placeholder(R.drawable.bg_placeholder)
+            .into(imgUser)
+
+        dialogPaymentOptions?.show()
     }
 }
