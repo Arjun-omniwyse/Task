@@ -7,6 +7,7 @@ import android.net.Network
 import android.net.NetworkRequest
 import android.os.Build
 import com.mindorks.nybus.NYBus
+
 import com.pro.app.BuildConfig
 import com.pro.app.MainApplication.Companion.instance
 import com.pro.app.data.events.NoInternetEvent
@@ -38,18 +39,7 @@ abstract class NetworkConnectionInterceptor : Interceptor {
                 }
             )
         }
-        val original = chain.request()
-        val android_id = instance.deviceID
-
-        val request = original.newBuilder()
-            .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MTFiYTE2YzFlN2VkNzRlNmI3YTA1YzRmZmJmY2UzOSIsInN1YiI6IjVmOTFlMTQwZDlmNGE2MDAzN2Q5ZDg2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eKtfOeKlSsrI2R5LmoOCnZLQ3R0g2kA7n4lbX4kFcTc")
-            .header("os", "android")
-            .header("duid", android_id)
-            .header("app_version", BuildConfig.VERSION_NAME)
-            .header("app_version_code", BuildConfig.VERSION_CODE.toString())
-            .method(original.method(), original.body())
-            .build()
-        return chain.proceed(request)
+        return chain.proceed(chain.request())
     }
 
     internal inner class NoConnectivityException : IOException() {

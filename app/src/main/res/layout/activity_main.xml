@@ -4,77 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/white">
 
-    <RelativeLayout
-        android:id="@+id/rlTop"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
+        android:id="@+id/appBar"
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgAppIcon"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:clickable="true"
-            android:padding="@dimen/_12sdp"
-            app:srcCompat="@drawable/ic_appicon" />
-
-        <RelativeLayout
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imgAppIcon"
-            android:id="@+id/rlSearch"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:background="@drawable/bg_searchbox">
+            app:contentInsetStart="0dp"
+            android:layout_height="?attr/actionBarSize"
+            >
 
-            <EditText
-                android:id="@+id/etSearch"
+            <RelativeLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/imgSearch"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/nunito_regular"
-                android:gravity="center_vertical"
-                android:hint="Search movie..."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:lines="1"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/_7sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingRight="@dimen/_7sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@null"
-                android:textSize="@dimen/_10sdp"
-                tools:ignore="MissingPrefix" />
+                android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgSearch"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignTop="@+id/etSearch"
-                android:layout_alignBottom="@+id/etSearch"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:padding="@dimen/_5sdp"
-                app:srcCompat="@drawable/ic_search"
-                app:tint="@color/white" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:id="@+id/imgLogo"
+                    android:layout_height="match_parent"
+                    android:tint="@color/white"
+                    android:padding="@dimen/_9sdp"
+                    app:srcCompat="@drawable/ic_appicon" />
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_toLeftOf="@+id/imgToggle"
+                    android:layout_toRightOf="@+id/imgLogo"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp" />
 
-    </RelativeLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:id="@+id/imgToggle"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="match_parent"
+                    android:tint="@color/white"
+                    android:padding="@dimen/_11sdp"
+                    app:srcCompat="@drawable/ic_grid" />
+
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMovies"
+        android:id="@+id/rvUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rlTop"
-        tools:listitem="@layout/item_movie" />
+        android:layout_below="@+id/appBar"
+        tools:listitem="@layout/item_user" />
 
     <include layout="@layout/layout_loader"></include>
 

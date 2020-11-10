@@ -1,142 +1,55 @@
 package com.pro.app.data.network
 
 import androidx.lifecycle.MutableLiveData
-import com.pro.app.BuildConfig
 import com.pro.app.data.Resource
-import com.pro.app.data.responses.*
+import com.pro.app.data.models.ModelUser
+import com.pro.app.data.models.ModelUserData
 import retrofit2.Response
 
 open class AppInteractor {
 
     private val apiService: APIService = AppClient.getClient().create(APIService::class.java)
-    private val api_key = BuildConfig.API_KEY
 
-    fun getNowPlaying(
-        viewModel: MutableLiveData<Resource<NowPlayingResponse>>
+    fun getUsersList(
+        viewModel: MutableLiveData<Resource<ArrayList<ModelUser>>>, since: String, per_page: String
     ) {
 
         viewModel.postValue(Resource.loading(null))
 
-        val call = apiService.getNowPlaynig(api_key)
-        call.enqueue(object : SuccessCallback<NowPlayingResponse>() {
+        val call = apiService.getUsersList(since,per_page)
+        call.enqueue(object : SuccessCallback<ArrayList<ModelUser>>() {
 
-            override fun onSuccess(response: Response<NowPlayingResponse>) {
+            override fun onSuccess(response: Response<ArrayList<ModelUser>>) {
                 try {
                     viewModel.postValue(Resource.success(response.body()))
                 } catch (ex: Exception) {
                     viewModel.postValue(Resource.error(ex.toString(), null))
                 }
             }
+
             override fun onFailure(message: String) {
                 viewModel.postValue(Resource.error(message, null))
             }
         })
     }
 
-    fun getMovieDetails(
-        movie_id:String,
-        viewModel: MutableLiveData<Resource<MovieDetailsResponse>>
+    fun getUserData(
+        login: String,
+        viewModel: MutableLiveData<Resource<ModelUserData>>
     ) {
 
         viewModel.postValue(Resource.loading(null))
-        val call = apiService.getSynopsis(movie_id,api_key)
-        call.enqueue(object : SuccessCallback<MovieDetailsResponse>() {
+        val call = apiService.getUserData(login)
+        call.enqueue(object : SuccessCallback<ModelUserData>() {
 
-            override fun onSuccess(response: Response<MovieDetailsResponse>) {
+            override fun onSuccess(response: Response<ModelUserData>) {
                 try {
                     viewModel.postValue(Resource.success(response.body()))
                 } catch (ex: Exception) {
                     viewModel.postValue(Resource.error(ex.toString(), null))
                 }
             }
-            override fun onFailure(message: String) {
-                viewModel.postValue(Resource.error(message, null))
-            }
-        })
-    }
 
-    fun getCredits(
-        movie_id:String,
-        viewModel: MutableLiveData<Resource<MovieCreditsResponse>>
-    ) {
-
-        viewModel.postValue(Resource.loading(null))
-        val call = apiService.getCredits(movie_id,api_key)
-        call.enqueue(object : SuccessCallback<MovieCreditsResponse>() {
-
-            override fun onSuccess(response: Response<MovieCreditsResponse>) {
-                try {
-                    viewModel.postValue(Resource.success(response.body()))
-                } catch (ex: Exception) {
-                    viewModel.postValue(Resource.error(ex.toString(), null))
-                }
-            }
-            override fun onFailure(message: String) {
-                viewModel.postValue(Resource.error(message, null))
-            }
-        })
-    }
-
-    fun getReviews(
-        movie_id:String,
-        viewModel: MutableLiveData<Resource<MovieReviewsResponse>>
-    ) {
-
-        viewModel.postValue(Resource.loading(null))
-        val call = apiService.getReviews(movie_id,api_key)
-        call.enqueue(object : SuccessCallback<MovieReviewsResponse>() {
-
-            override fun onSuccess(response: Response<MovieReviewsResponse>) {
-                try {
-                    viewModel.postValue(Resource.success(response.body()))
-                } catch (ex: Exception) {
-                    viewModel.postValue(Resource.error(ex.toString(), null))
-                }
-            }
-            override fun onFailure(message: String) {
-                viewModel.postValue(Resource.error(message, null))
-            }
-        })
-    }
-
-    fun getSimilarMovies(
-        movie_id:String,
-        viewModel: MutableLiveData<Resource<SimilarMoviesResponse>>
-    ) {
-
-        viewModel.postValue(Resource.loading(null))
-        val call = apiService.getSimilarMovies(movie_id,api_key)
-        call.enqueue(object : SuccessCallback<SimilarMoviesResponse>() {
-
-            override fun onSuccess(response: Response<SimilarMoviesResponse>) {
-                try {
-                    viewModel.postValue(Resource.success(response.body()))
-                } catch (ex: Exception) {
-                    viewModel.postValue(Resource.error(ex.toString(), null))
-                }
-            }
-            override fun onFailure(message: String) {
-                viewModel.postValue(Resource.error(message, null))
-            }
-        })
-    }
-
-    fun getMovieVideos(
-        movie_id:String,
-        viewModel: MutableLiveData<Resource<MovieVideosResponse>>
-    ) {
-
-        viewModel.postValue(Resource.loading(null))
-        val call = apiService.getMovieVideos(movie_id,api_key)
-        call.enqueue(object : SuccessCallback<MovieVideosResponse>() {
-
-            override fun onSuccess(response: Response<MovieVideosResponse>) {
-                try {
-                    viewModel.postValue(Resource.success(response.body()))
-                } catch (ex: Exception) {
-                    viewModel.postValue(Resource.error(ex.toString(), null))
-                }
-            }
             override fun onFailure(message: String) {
                 viewModel.postValue(Resource.error(message, null))
             }

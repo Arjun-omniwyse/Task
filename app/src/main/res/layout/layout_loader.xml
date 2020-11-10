@@ -11,17 +11,11 @@
     android:visibility="gone"
     tools:ignore="MissingPrefix">
 
-    <com.airbnb.lottie.LottieAnimationView
+    <ProgressBar
         android:id="@+id/imgLoader"
-        android:layout_width="@dimen/_160sdp"
-        android:layout_height="@dimen/_160sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        app:lottie_autoPlay="true"
-        app:lottie_cacheStrategy="none"
-        app:lottie_fileName="loader.json"
-        app:lottie_loop="true" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
 
 </RelativeLayout>
