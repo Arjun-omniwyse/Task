@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_20sdp"
+    android:paddingBottom="@dimen/_20sdp"
+    android:paddingLeft="@dimen/_20sdp"
+    android:paddingRight="@dimen/_20sdp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgUser"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_user"
+        app:civ_border_color="#c3c3c3"
+        app:civ_border_width="0.3dp" />
+
+    <TextView
+        android:id="@+id/txtOriginalName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgUser"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito_semibold"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        tools:text="Shreenivas" />
+
+    <TextView
+        android:id="@+id/txtNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtOriginalName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito_semibold"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/_9sdp"
+        tools:text="Shreenivas" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNickName"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtFollowers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                tools:text="00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center_vertical"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_10sdp"
+                tools:text="Followers" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtFollowing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                tools:text="00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center_vertical"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_10sdp"
+                tools:text="Following" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtRepos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                tools:text="00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center_vertical"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_10sdp"
+                tools:text="Repositories" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
