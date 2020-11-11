@@ -1,20 +1,12 @@
 package com.pro.app
 
+import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.provider.Settings
-import android.provider.Settings.Secure.ANDROID_ID
-import androidx.multidex.MultiDex
-import androidx.multidex.MultiDexApplication
 
-class MainApplication : MultiDexApplication() {
-
-    override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
-    }
+class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

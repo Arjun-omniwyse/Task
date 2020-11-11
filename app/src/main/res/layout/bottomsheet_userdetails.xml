@@ -47,14 +47,31 @@
         android:gravity="center_vertical"
         android:lines="1"
         android:textColor="@color/grey"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_11sdp"
         tools:text="Shreenivas" />
 
     <TextView
-        android:id="@+id/txtVisitProfile"
+        android:visibility="gone"
+        android:id="@+id/txtLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtNickName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito_regular"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/_11sdp"
+        tools:text="Shreenivas" />
+
+    <TextView
+        android:layout_marginTop="@dimen/_7sdp"
+        android:id="@+id/txtVisitProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtLocation"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/nunito_regular"
         android:gravity="center_vertical"
@@ -63,12 +80,12 @@
         android:textSize="@dimen/_9sdp"
         android:text="Visit profile" />
 
-
     <LinearLayout
+        android:id="@+id/llCounts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtNickName"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_below="@+id/txtVisitProfile"
+        android:layout_marginTop="@dimen/_12sdp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -157,6 +174,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:textStyle="italic"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:id="@+id/txtBio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llCounts"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/nunito_regular"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        tools:text="Bio" />
 
 </RelativeLayout>
 

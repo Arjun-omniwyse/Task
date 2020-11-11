@@ -23,13 +23,13 @@ import com.pro.app.data.models.OnClick
 import com.pro.app.extensions.roundTo
 import com.pro.app.extensions.showLog
 import com.pro.app.extensions.showMessage
+import com.pro.app.extensions.visible
 import com.pro.app.ui.adapters.UsersListAdapter
 import com.pro.app.ui.adapters.UsersLoadStateAdapter
 import com.pro.app.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-
 
 class MainActivity : BaseActivity() {
 
@@ -112,6 +112,18 @@ class MainActivity : BaseActivity() {
         val txtFollowing = view.findViewById<TextView>(R.id.txtFollowing)
         val txtRepos = view.findViewById<TextView>(R.id.txtRepos)
         val txtVisitProfile = view.findViewById<TextView>(R.id.txtVisitProfile)
+        val txtBio = view.findViewById<TextView>(R.id.txtBio)
+        val txtLocation = view.findViewById<TextView>(R.id.txtLocation)
+
+        if (!modelUserData?.bio.isNullOrEmpty()) {
+            txtBio.visible(true)
+            txtBio.text = modelUserData?.bio
+        }
+
+        if (!modelUserData?.location.isNullOrEmpty()) {
+            txtLocation.visible(true)
+            txtLocation.text = modelUserData?.location
+        }
 
         txtVisitProfile.paintFlags = txtVisitProfile.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
