@@ -18,7 +18,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
 
     var userDataLiveData: MutableLiveData<Resource<ModelUserData>> = MutableLiveData()
 
-    val users = Pager(PagingConfig(pageSize = 20)) {
+    val users = Pager(PagingConfig(pageSize = 20,prefetchDistance = 5)) {
         PagingDataSource(AppClient.getClient().create(APIService::class.java))
     }.flow.cachedIn(viewModelScope)
 

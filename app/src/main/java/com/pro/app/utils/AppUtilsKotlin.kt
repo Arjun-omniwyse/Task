@@ -9,6 +9,20 @@ import java.util.*
 class AppUtilsKotlin {
     companion object {
 
+        fun isJSONValid(test: String): Boolean {
+            try {
+                JSONObject(test)
+            } catch (ex: JSONException) {
+                try {
+                    JSONArray(test)
+                } catch (ex1: JSONException) {
+                    return false
+                }
+
+            }
+            return true
+        }
+
         fun formatString(text: String): String {
 
             val json = StringBuilder()

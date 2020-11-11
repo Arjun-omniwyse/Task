@@ -33,7 +33,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
 
-    lateinit var list: ArrayList<ModelUser>
     lateinit var adapter: UsersListAdapter
 
     var toggle = "list"
@@ -47,8 +46,6 @@ class MainActivity : BaseActivity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
         }
-
-        list = ArrayList()
 
         rvUsers.layoutManager = LinearLayoutManager(this)
         rvUsers.setHasFixedSize(true)
