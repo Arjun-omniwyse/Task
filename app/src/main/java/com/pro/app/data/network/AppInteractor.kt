@@ -10,29 +10,6 @@ open class AppInteractor {
 
     private val apiService: APIService = AppClient.getClient().create(APIService::class.java)
 
-    fun getUsersList(
-        viewModel: MutableLiveData<Resource<ArrayList<ModelUser>>>, since: String, per_page: String
-    ) {
-
-        viewModel.postValue(Resource.loading(null))
-
-        //val call = apiService.getUsersList(since.toInt(),per_page.toInt())
-        /*call.enqueue(object : SuccessCallback<ArrayList<ModelUser>>() {
-
-            override fun onSuccess(response: Response<ArrayList<ModelUser>>) {
-                try {
-                    viewModel.postValue(Resource.success(response.body()))
-                } catch (ex: Exception) {
-                    viewModel.postValue(Resource.error(ex.toString(), null))
-                }
-            }
-
-            override fun onFailure(message: String) {
-                viewModel.postValue(Resource.error(message, null))
-            }
-        })*/
-    }
-
     fun getUserData(
         login: String,
         viewModel: MutableLiveData<Resource<ModelUserData>>

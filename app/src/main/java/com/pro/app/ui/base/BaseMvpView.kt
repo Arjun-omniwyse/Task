@@ -6,6 +6,4 @@ interface BaseMvpView {
 
     fun hideLoading()
 
-    fun onError(msg: String)
-
 }

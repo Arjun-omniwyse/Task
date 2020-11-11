@@ -9,29 +9,6 @@ import java.util.*
 class AppUtilsKotlin {
     companion object {
 
-        fun getReleaseYear(release_date: String): String {
-            val format = SimpleDateFormat(Constants.DATEFORMAT_1, Locale.getDefault())
-            format.timeZone = TimeZone.getTimeZone("UTC")
-            val date = format.parse(release_date)
-            var modifiedDate =
-                SimpleDateFormat(Constants.DATE_FORMAT_2, Locale.getDefault()).format(date)
-            return modifiedDate
-        }
-
-        fun isJSONValid(test: String): Boolean {
-            try {
-                JSONObject(test)
-            } catch (ex: JSONException) {
-                try {
-                    JSONArray(test)
-                } catch (ex1: JSONException) {
-                    return false
-                }
-
-            }
-            return true
-        }
-
         fun formatString(text: String): String {
 
             val json = StringBuilder()

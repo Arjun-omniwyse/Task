@@ -45,10 +45,6 @@ abstract class BaseActivity : AppCompatActivity(),
         rlLoader.visibility = View.GONE
     }
 
-    override fun onError(msg: String) {
-
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         NYBus.get().unregister(this)

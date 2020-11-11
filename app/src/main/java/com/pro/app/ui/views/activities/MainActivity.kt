@@ -1,5 +1,8 @@
 package com.pro.app.ui.views.activities
 
+import android.content.Intent
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.WindowManager
@@ -26,6 +29,7 @@ import com.pro.app.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 
 class MainActivity : BaseActivity() {
 
@@ -60,33 +64,11 @@ class MainActivity : BaseActivity() {
             footer = UsersLoadStateAdapter { adapter.retry() }
         )
 
-        //rvUsers.adapter = adapter
-
         lifecycleScope.launch {
             mainViewModel.users.collectLatest { pagedData ->
                 adapter.submitData(pagedData)
             }
         }
-
-        mainViewModel.usersListLiveData.observe(this, Observer {
-            "data posted".showLog()
-            when (it?.status) {
-                Status.SUCCESS -> {
-                    hideLoading()
-                    list.clear()
-                    list.addAll(it.data!!)
-                    adapter.notifyDataSetChanged()
-
-                }
-                Status.LOADING -> {
-                    showLoading()
-                }
-                Status.ERROR -> {
-                    hideLoading()
-                    it.message?.let { showMessage(it) }
-                }
-            }
-        })
 
         mainViewModel.userDataLiveData.observe(this, Observer {
             "data posted".showLog()
@@ -104,8 +86,6 @@ class MainActivity : BaseActivity() {
                 }
             }
         })
-
-        //mainViewModel.getUsersList("0", "30")
 
     }
 
@@ -134,12 +114,24 @@ class MainActivity : BaseActivity() {
         val txtFollowers = view.findViewById<TextView>(R.id.txtFollowers)
         val txtFollowing = view.findViewById<TextView>(R.id.txtFollowing)
         val txtRepos = view.findViewById<TextView>(R.id.txtRepos)
+        val txtVisitProfile = view.findViewById<TextView>(R.id.txtVisitProfile)
+
+        txtVisitProfile.paintFlags = txtVisitProfile.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+
+        txtVisitProfile.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(modelUserData?.html_url)))
+        }
 
         txtNickName.text = modelUserData?.login
         txtOriginalName.text = modelUserData?.name
         txtFollowers.text =
-            if (modelUserData?.followers!!.toFloat() > 1000) "${(modelUserData?.followers!!.toFloat() / 1000).roundTo(1)}k" else modelUserData?.followers
-        txtFollowing.text = if (modelUserData?.following!!.toFloat() > 1000) "${(modelUserData?.following!!.toFloat() / 1000).roundTo(1)}k" else modelUserData?.following
+            if (modelUserData?.followers!!.toFloat() > 1000) "${(modelUserData?.followers!!.toFloat() / 1000).roundTo(
+                1
+            )}k" else modelUserData?.followers
+        txtFollowing.text =
+            if (modelUserData?.following!!.toFloat() > 1000) "${(modelUserData?.following!!.toFloat() / 1000).roundTo(
+                1
+            )}k" else modelUserData?.following
         txtRepos.text = modelUserData?.public_repos
 
         Glide.with(this)

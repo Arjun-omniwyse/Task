@@ -13,5 +13,6 @@ data class ModelUserData(
         var following: String = "",
         var location: String = "",
         var bio: String = "",
-        var avatar_url: String = ""
+        var avatar_url: String = "",
+        var html_url: String = ""
 ):Parcelable

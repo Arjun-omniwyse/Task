@@ -16,17 +16,11 @@ import com.pro.app.utils.PagingDataSource
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
-    var usersListLiveData: MutableLiveData<Resource<ArrayList<ModelUser>>> = MutableLiveData()
     var userDataLiveData: MutableLiveData<Resource<ModelUserData>> = MutableLiveData()
 
     val users = Pager(PagingConfig(pageSize = 20)) {
         PagingDataSource(AppClient.getClient().create(APIService::class.java))
     }.flow.cachedIn(viewModelScope)
-
-    fun getUsersList(since:String,per_page:String): MutableLiveData<Resource<ArrayList<ModelUser>>> {
-        appInteractor.getUsersList(usersListLiveData,since,per_page)
-        return usersListLiveData
-    }
 
     fun getUserData(login: String): MutableLiveData<Resource<ModelUserData>> {
         appInteractor.getUserData(login, userDataLiveData)
