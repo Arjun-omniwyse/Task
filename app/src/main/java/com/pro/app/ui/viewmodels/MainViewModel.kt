@@ -2,15 +2,26 @@ package com.pro.app.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.pro.app.data.Resource
 import com.pro.app.data.models.ModelUser
 import com.pro.app.data.models.ModelUserData
+import com.pro.app.data.network.APIService
+import com.pro.app.data.network.AppClient
 import com.pro.app.ui.base.BaseViewModel
+import com.pro.app.utils.PagingDataSource
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
     var usersListLiveData: MutableLiveData<Resource<ArrayList<ModelUser>>> = MutableLiveData()
     var userDataLiveData: MutableLiveData<Resource<ModelUserData>> = MutableLiveData()
+
+    val users = Pager(PagingConfig(pageSize = 20)) {
+        PagingDataSource(AppClient.getClient().create(APIService::class.java))
+    }.flow.cachedIn(viewModelScope)
 
     fun getUsersList(since:String,per_page:String): MutableLiveData<Resource<ArrayList<ModelUser>>> {
         appInteractor.getUsersList(usersListLiveData,since,per_page)

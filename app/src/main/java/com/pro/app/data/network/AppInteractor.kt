@@ -16,8 +16,8 @@ open class AppInteractor {
 
         viewModel.postValue(Resource.loading(null))
 
-        val call = apiService.getUsersList(since,per_page)
-        call.enqueue(object : SuccessCallback<ArrayList<ModelUser>>() {
+        //val call = apiService.getUsersList(since.toInt(),per_page.toInt())
+        /*call.enqueue(object : SuccessCallback<ArrayList<ModelUser>>() {
 
             override fun onSuccess(response: Response<ArrayList<ModelUser>>) {
                 try {
@@ -30,7 +30,7 @@ open class AppInteractor {
             override fun onFailure(message: String) {
                 viewModel.postValue(Resource.error(message, null))
             }
-        })
+        })*/
     }
 
     fun getUserData(

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -20,8 +21,11 @@ import com.pro.app.extensions.roundTo
 import com.pro.app.extensions.showLog
 import com.pro.app.extensions.showMessage
 import com.pro.app.ui.adapters.UsersListAdapter
+import com.pro.app.ui.adapters.UsersLoadStateAdapter
 import com.pro.app.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
 
@@ -44,14 +48,25 @@ class MainActivity : BaseActivity() {
 
         rvUsers.layoutManager = LinearLayoutManager(this)
         rvUsers.setHasFixedSize(true)
-        adapter = UsersListAdapter(this, list, object : OnClick {
+        adapter = UsersListAdapter(this, object : OnClick {
 
             override fun onUserClicked(modelUser: ModelUser) {
                 mainViewModel.getUserData(modelUser.login)
             }
         })
 
-        rvUsers.adapter = adapter
+        rvUsers.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = UsersLoadStateAdapter { adapter.retry() },
+            footer = UsersLoadStateAdapter { adapter.retry() }
+        )
+
+        //rvUsers.adapter = adapter
+
+        lifecycleScope.launch {
+            mainViewModel.users.collectLatest { pagedData ->
+                adapter.submitData(pagedData)
+            }
+        }
 
         mainViewModel.usersListLiveData.observe(this, Observer {
             "data posted".showLog()
@@ -90,7 +105,7 @@ class MainActivity : BaseActivity() {
             }
         })
 
-        mainViewModel.getUsersList("0", "30")
+        //mainViewModel.getUsersList("0", "30")
 
     }
 

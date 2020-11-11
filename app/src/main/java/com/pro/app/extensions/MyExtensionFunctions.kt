@@ -2,6 +2,7 @@ package com.pro.app.extensions
 
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,9 @@ import com.pro.app.utils.Constants.TAG
 import java.text.SimpleDateFormat
 import java.util.*
 
+fun View.visible(isVisible: Boolean) {
+    visibility = if (isVisible) View.VISIBLE else View.GONE
+}
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

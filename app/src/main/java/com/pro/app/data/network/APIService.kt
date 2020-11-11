@@ -10,10 +10,10 @@ import retrofit2.http.Query
 interface APIService {
 
     @GET(EndPoints.GET_USERS_LIST)
-    fun getUsersList(
-        @Query("since") since: String,
-        @Query("per_page") per_page: String
-    ): Call<ArrayList<ModelUser>>
+    suspend fun getUsersList(
+        @Query("since") since: Int,
+        @Query("per_page") per_page: Int
+    ): ArrayList<ModelUser>
 
     @GET(EndPoints.GET_USER_DATA)
     fun getUserData(

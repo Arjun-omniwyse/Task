@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pro.app.R
@@ -17,9 +19,8 @@ import java.util.*
 
 class UsersListAdapter(
     private var context: Context,
-    private var list: ArrayList<ModelUser>,
     private var onClick: OnClick
-) : RecyclerView.Adapter<UsersListAdapter.MyViewHolder>() {
+) : PagingDataAdapter<ModelUser, UsersListAdapter.MyViewHolder>(PassengersComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): MyViewHolder {
 
@@ -29,21 +30,17 @@ class UsersListAdapter(
     }
 
     private fun bindViews(holder: MyViewHolder, position: Int) {
-        val data = list[position]
+        val data = getItem(position)
 
-        holder.txtName.text = data.login
+        holder.txtName.text = data?.login
         Glide.with(context)
-            .load(data.avatar_url).dontTransform()
+            .load(data?.avatar_url).dontTransform()
             .placeholder(R.drawable.bg_placeholder)
             .into(holder.imgUser)
 
         holder.rlMain.setOnClickListener {
-            onClick.onUserClicked(data)
+            onClick.onUserClicked(data!!)
         }
-    }
-
-    override fun getItemCount(): Int {
-        return list.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -54,6 +51,16 @@ class UsersListAdapter(
         val rlMain = itemView.findViewById<View>(R.id.rlMain) as LinearLayout
         val imgUser = itemView.findViewById<View>(R.id.imgUser) as ImageView
         val txtName = itemView.findViewById<View>(R.id.txtName) as TextView
+    }
+
+    object PassengersComparator : DiffUtil.ItemCallback<ModelUser>() {
+        override fun areItemsTheSame(oldItem: ModelUser, newItem: ModelUser): Boolean {
+            return oldItem.login == newItem.login
+        }
+
+        override fun areContentsTheSame(oldItem: ModelUser, newItem: ModelUser): Boolean {
+            return oldItem == newItem
+        }
     }
 
 }
