@@ -2,7 +2,4 @@
     <string name="app_name">OmniWyse Task</string>
     <string name="message">Message</string>
     <string name="ok">Ok</string>
-    <string name="no">No</string>
-    <string name="yes">Yes</string>
-    <string name="server_error_message">Something went wrong!</string>
 </resources>
