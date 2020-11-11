@@ -14,8 +14,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgUser"
-        android:layout_width="@dimen/_35sdp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_user"
         app:civ_border_color="#c3c3c3"
@@ -47,7 +47,7 @@
         android:gravity="center_vertical"
         android:lines="1"
         android:textColor="@color/grey"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="@dimen/_12sdp"
         tools:text="Shreenivas" />
 
 

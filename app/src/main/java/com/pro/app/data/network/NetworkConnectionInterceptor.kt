@@ -39,7 +39,12 @@ abstract class NetworkConnectionInterceptor : Interceptor {
                 }
             )
         }
-        return chain.proceed(chain.request())
+        val original = chain.request()
+        val request = original.newBuilder()
+            .header("Authorization", "62c391667b1f8ad9123d6bd7fe83df12e9230f4d")
+            .method(original.method(), original.body())
+            .build()
+        return chain.proceed(request)
     }
 
     internal inner class NoConnectivityException : IOException() {
